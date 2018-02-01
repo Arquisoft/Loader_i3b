@@ -7,7 +7,7 @@ import es.uniovi.asw.parser.Citizen;
 /**
  * Interface for the methods that the DAO must accomplish
  * 
- * @author Gonzalo de la Cruz Fernández - UO244583
+ * @author Gonzalo de la Cruz Fernández - UO244583 - Prueba
  *
  */
 public interface CitizenDao {
