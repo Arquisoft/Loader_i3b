@@ -14,3 +14,4 @@ In order to run the application you need to download and install [mongoDB](https
 # Authors
 
 * Sergio Santano Álvarez (UO244858)
+* Jorge García Marín (UO245241)
