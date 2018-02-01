@@ -1,4 +1,4 @@
-# citizensLoader_i3b
+# Loader_i3b
 
 [![Join the chat at https://gitter.im/Arquisoft/citizensLoader_i3b](https://badges.gitter.im/Arquisoft/citizensLoader_i3b.svg)](https://gitter.im/Arquisoft/citizensLoader_i3b?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/Arquisoft/citizensLoader_i3b.svg?branch=master)](https://travis-ci.org/Arquisoft/citizensLoader_i3b)
@@ -17,7 +17,7 @@ In order to run the application you need to download and install [mongoDB](https
 * Oriol Invernón Llaneza (UO245303)
 * Adrian Mirón Cao (UO244843)
 
-# Current Authors
+# Current maintainers
 
 * Sergio Santano Álvarez (UO244858)
 * Jorge García Marín (UO245241)
