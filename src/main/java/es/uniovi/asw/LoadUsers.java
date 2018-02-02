@@ -4,7 +4,7 @@ import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.SingletonParser;
 
 /**
- * Main application - test
+ * Main application
  * 
  * @author Labra
  *
