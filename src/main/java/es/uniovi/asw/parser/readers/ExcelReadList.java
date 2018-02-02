@@ -18,7 +18,7 @@ import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
 
 /**
- * @author Oriol. Excel parser.
+ * @author Jorge. Excel parser.
  */
 public class ExcelReadList extends AbstractReadList {
 
