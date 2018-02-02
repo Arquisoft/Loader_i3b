@@ -21,4 +21,5 @@ public interface CitizenDao {
 	List<Citizen> findAll();
 
 	void cleanDatabase();
+	//prueba
 }
