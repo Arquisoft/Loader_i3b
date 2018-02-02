@@ -26,6 +26,6 @@ public class LoadUsers {
 		rl.parse(ruta[0]);
 	}
 	
-	//asd
+	
 
 }
