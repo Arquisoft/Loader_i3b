@@ -1,11 +1,12 @@
 package es.uniovi.asw.parser.agents;
 
 public abstract class AbstractAgent {
-	private String name;
-	private String location;
-	private String email;	
-	private String identifier;
-	private int kind;
+	protected String name;
+	protected String location;
+	protected String email;	
+	protected String identifier;
+	protected int kind;
+	protected String password;
 	
 	public AbstractAgent(String name, String location, String email, String identifier, int kind) {
 		super();
@@ -45,6 +46,13 @@ public abstract class AbstractAgent {
 	}
 	public void setKind(int kind) {
 		this.kind = kind;
+	}
+
+	public void setPassword(String string) {
+		password = string;
+	}
+	public String getPassword() {
+		return this.password;
 	}
 	
 	

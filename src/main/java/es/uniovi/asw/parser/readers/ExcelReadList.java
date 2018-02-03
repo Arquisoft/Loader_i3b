@@ -16,6 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import es.uniovi.asw.parser.Citizen;
+import es.uniovi.asw.parser.agents.AbstractAgent;
+import es.uniovi.asw.parser.agents.PersonAgent;
 import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
 
 /**
@@ -43,41 +45,46 @@ public class ExcelReadList extends AbstractReadList {
 
 			wb = new XSSFWorkbook(OPCPackage.open(file));
 			sheet = wb.getSheetAt(0);
-			census = new HashSet<Citizen>();
+			agentsCensus = new HashSet<AbstractAgent>();
 
 			int rows = sheet.getPhysicalNumberOfRows();
 
-			int cols = 9; // Nombre/Apellidos/Email/Fecha
+			int cols = 5; // Nombre/Apellidos/Email/Fecha
 							// nacimiento/Dirección/Nacionalidad/DNI/NIF/Polling
 							// code
 
 			for (int r = 1; r < rows; r++) {
 				row = sheet.getRow(r);
 
-				String[] data = parseRow(row, cols);
+				Object[] data = parseRow(row, cols);
 
-				Citizen cit = null;
+				AbstractAgent agent = null;
 
 				if (data != null) {
 
-					if (data[6] == null) {
-						wReport.report("Null DNI on row number " + r, ruta);
-					} else if (data[0] == null) {
+					if (data[0] == null) {
 						wReport.report("Null name on row number " + r, ruta);
-					} else if (data[3] == null) {
-						wReport.report("Null birth date on row number " + r, ruta);
-					} else if (data[4] == null) {
-						wReport.report("Null address on row number " + r, ruta);
 					} else if (data[1] == null) {
-						wReport.report("Null last name on row number " + r, ruta);
-					} else if (data[7] == null) {
-						wReport.report("Null NIF on row number " + r, ruta);
+						wReport.report("Null location on row number " + r, ruta);
+					} else if (data[2] == null) {
+						wReport.report("Null email on row number " + r, ruta);
+					} else if (data[3] == null) {
+						wReport.report("Null identifier on row number " + r, ruta);
+					} else if (data[4] == null) {
+						wReport.report("Null kind name on row number " + r, ruta);
+					
 					} else {
-						cit = new Citizen(data);
-						if (census.contains(cit)) {
+						
+						String kind = masterKinds.get(data[4]);
+						switch (kind) {
+						case "Person" : agent = new PersonAgent(data); break;
+						case "Entity" : agent = new PersonAgent(data); break; //modificar
+						case "Sensor" : agent = new PersonAgent(data); break; //modificar
+						}
+						if (agentsCensus.contains(agent)) {
 							wReport.report("Duplicated citizen on row number " + r, ruta);
 						} else {
-							census.add(cit);
+							agentsCensus.add(agent);
 						}
 
 					}
@@ -97,19 +104,16 @@ public class ExcelReadList extends AbstractReadList {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	private String[] parseRow(XSSFRow row, int cols) throws ParseException {
+	private Object[] parseRow(XSSFRow row, int cols) throws ParseException {
 		XSSFCell cell;
-		String[] data = new String[cols];
+		Object[] data = new Object[cols];
 
 		if (row != null) {
 			for (int c = 0; c < cols; c++) {
 				cell = row.getCell((short) c);
 				if (cell != null && !cell.toString().equals("")) {
-					if (cell.getCellTypeEnum() == CellType.NUMERIC 
-							&& DateUtil.isCellDateFormatted(cell)) {
-						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-						data[c] = sdf.format(cell.getDateCellValue());
+					if (cell.getCellTypeEnum() == CellType.NUMERIC ) {
+						data[c] = Double.valueOf(cell.toString()).intValue();
 					} else {
 						data[c] = cell.toString();
 					}
