@@ -8,4 +8,6 @@ import java.util.Set;
  */
 public interface ReadList {
 	Set<Citizen> parse(String ruta);
+
+	void parseMaster(String ruta);
 }

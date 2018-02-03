@@ -1,5 +1,6 @@
 package es.uniovi.asw.parser.readers;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import es.uniovi.asw.database.CitizenDao;
@@ -19,6 +20,7 @@ import es.uniovi.asw.reportwriter.WriteReportDefault;
 public abstract class AbstractReadList implements ReadList {
 
 	protected Set<Citizen> census;
+	protected HashMap<Integer,String> masterKinds;
 	private LetterGenerator letterGen;
 	protected WriteReport wReport;
 
@@ -53,6 +55,13 @@ public abstract class AbstractReadList implements ReadList {
 		}
 	}
 
+	@Override
+	public void parseMaster(String ruta) {
+
+		doParseMaster(ruta);
+
+	}
 	protected abstract void doParse(String ruta);
+	protected abstract void doParseMaster(String ruta);
 
 }
