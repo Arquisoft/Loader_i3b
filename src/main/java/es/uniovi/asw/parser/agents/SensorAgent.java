@@ -1,12 +1,12 @@
 package es.uniovi.asw.parser.agents;
 
-public class PersonAgent extends AbstractAgent {
+public class SensorAgent extends AbstractAgent {
 
-	public PersonAgent(String name, String location, String email, String identifier, int kind) {
+	public SensorAgent(String name, String location, String email, String identifier, int kind) {
 		super(name, location, email, identifier, kind);
 	}
 
-	public PersonAgent(Object[] data) {
+	public SensorAgent(Object[] data) {
 		super((String)data[0],(String)data[1],(String)data[2],(String) data[3], (Integer)data[4]);	
 	}
 

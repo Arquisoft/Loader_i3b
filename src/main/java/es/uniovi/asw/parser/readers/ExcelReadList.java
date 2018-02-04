@@ -17,7 +17,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.agents.AbstractAgent;
+import es.uniovi.asw.parser.agents.EntityAgent;
 import es.uniovi.asw.parser.agents.PersonAgent;
+import es.uniovi.asw.parser.agents.SensorAgent;
 import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
 
 /**
@@ -49,9 +51,7 @@ public class ExcelReadList extends AbstractReadList {
 
 			int rows = sheet.getPhysicalNumberOfRows();
 
-			int cols = 5; // Nombre/Apellidos/Email/Fecha
-							// nacimiento/Dirección/Nacionalidad/DNI/NIF/Polling
-							// code
+			int cols = 5; 
 
 			for (int r = 1; r < rows; r++) {
 				row = sheet.getRow(r);
@@ -78,11 +78,11 @@ public class ExcelReadList extends AbstractReadList {
 						String kind = masterKinds.get(data[4]);
 						switch (kind) {
 						case "Person" : agent = new PersonAgent(data); break;
-						case "Entity" : agent = new PersonAgent(data); break; //modificar
-						case "Sensor" : agent = new PersonAgent(data); break; //modificar
+						case "Entity" : agent = new EntityAgent(data); break;
+						case "Sensor" : agent = new SensorAgent(data); break;
 						}
 						if (agentsCensus.contains(agent)) {
-							wReport.report("Duplicated citizen on row number " + r, ruta);
+							wReport.report("Duplicated agent on row number " + r, ruta);
 						} else {
 							agentsCensus.add(agent);
 						}
@@ -96,7 +96,7 @@ public class ExcelReadList extends AbstractReadList {
 
 			wb.close();
 		} catch (FileNotFoundException e) {
-			wReport.report(e, "No se ha encontrado el archivo solicitado");
+			wReport.report(e, "File not found");
 		}
 
 		catch (Exception ioe) {

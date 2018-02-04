@@ -3,7 +3,7 @@ package es.uniovi.asw.parser.readers;
 import java.util.HashMap;
 import java.util.Set;
 
-import es.uniovi.asw.database.CitizenDao;
+import es.uniovi.asw.database.AgentDao;
 import es.uniovi.asw.database.MongoPersistanceFactory;
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
@@ -48,7 +48,7 @@ public abstract class AbstractReadList implements ReadList {
 	}
 
 	private void insertCitizens(Set<AbstractAgent> census) {
-		CitizenDao dao = MongoPersistanceFactory.getCitizenDao();
+		AgentDao dao = MongoPersistanceFactory.getCitizenDao();
 		for (AbstractAgent c : census) {
 			if (dao.insert(c)) {
 				letterGen.generatePersonalLetter(c);

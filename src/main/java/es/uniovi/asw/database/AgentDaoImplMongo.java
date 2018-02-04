@@ -15,17 +15,20 @@ import com.mongodb.DuplicateKeyException;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
-import es.uniovi.asw.parser.Citizen;
+import es.uniovi.asw.parser.agents.AbstractAgent;
+import es.uniovi.asw.parser.agents.EntityAgent;
+import es.uniovi.asw.parser.agents.PersonAgent;
+import es.uniovi.asw.parser.agents.SensorAgent;
 import es.uniovi.asw.reportwriter.WriteReport;
 import es.uniovi.asw.reportwriter.WriteReportDefault;
 
 /**
  * DAO implementation for MongoDB database
  * 
- * @author Gonzalo de la Cruz Fernández - UO244583
+ * @author Sergio Santano Álvarez - UO244858
  *
  */
-public class CitizenDaoImplMongo implements CitizenDao {
+public class AgentDaoImplMongo implements AgentDao {
 
 
 	private MongoClient mongo;
@@ -39,7 +42,7 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	 * specified above
 	 */
 	@SuppressWarnings("deprecation")
-	public CitizenDaoImplMongo() {
+	public AgentDaoImplMongo() {
 		
 		if (loadProperties()) {
 
@@ -81,7 +84,7 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	 * @param collection
 	 */
 	@SuppressWarnings("deprecation")
-	public CitizenDaoImplMongo(String host, int port, String database,
+	public AgentDaoImplMongo(String host, int port, String database,
 			String collection) {
 		this.reporter = new WriteReportDefault();
 		this.mongo = new MongoClient(host, port);
@@ -102,21 +105,17 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	 */
 
 	@Override
-	public boolean insert(Citizen c) {
+	public boolean insert(AbstractAgent a) {
 		BasicDBObject document = new BasicDBObject();
-		document.put("firstName", c.getName());
-		document.put("lastName", c.getlastName());
-		document.put("email", c.getEmail());
-		document.put("password", c.getPassword());
-		document.put("dateOfBirth", c.getbirthDate());
-		document.put("address", c.getAddress());
-		document.put("nationality", c.getNationality());
-		document.put("id", c.getID());
-		document.put("nif", c.getNIF());
-		document.put("pollingStation", c.getpollingStation());
+		document.put("name", a.getName());
+		document.put("location", a.getLocation());
+		document.put("email", a.getEmail());
+		document.put("identifier", a.getIdentifier());
+		document.put("kind", a.getKind());
+		document.put("password", a.getPassword());
 		try {
 			users.insert(document);
-			reporter.logDatabaseInsertion(c);
+			reporter.logDatabaseInsertion(a);
 			return true;
 		} catch (DuplicateKeyException me) {
 			reporter.report(me, "Error inserting in the database: "
@@ -153,20 +152,17 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	 */
 
 	@Override
-	public Citizen findById(String ID) {
+	public AbstractAgent findById(String ID) {
 		BasicDBObject whereQuery = new BasicDBObject();
 		whereQuery.put("id", ID);
 		DBCursor cursor = users.find(whereQuery);
-		Citizen c = null;
+		AbstractAgent a = null;
 		while (cursor.hasNext()) {
 			DBObject user = cursor.next();
-			c = new Citizen((String) user.get("firstName"), (String) user.get(
-					"lastName"), (String) user.get("email"), (Date) user.get(
-							"dateOfBirth"), (String) user.get("address"),
-					(String) user.get("nationality"), (String) user.get("id"),
-					(String) user.get("nif"), (int) user.get("pollingStation"));
+			a = createAgentByKind((String) user.get("name"), (String) user.get("location"), (String) user.get("email"), 
+						(String) user.get("identifier"), (int) user.get("kind"));
 		}
-		return c;
+		return a;
 	}
 
 	/**
@@ -176,23 +172,19 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	 */
 
 	@Override
-	public List<Citizen> findAll() {
+	public List<AbstractAgent> findAll() {
 
-		List<Citizen> allCitizens = new ArrayList<>();
+		List<AbstractAgent> allAgents = new ArrayList<>();
 
 		DBCursor cursor = users.find();
 		while (cursor.hasNext()) {
 			DBObject user = cursor.next();
-			Citizen c = new Citizen((String) user.get("firstName"),
-					(String) user.get("lastName"), (String) user.get("email"),
-					(Date) user.get("dateOfBirth"), (String) user.get(
-							"address"), (String) user.get("nationality"),
-					(String) user.get("id"), (String) user.get("nif"),
-					(int) user.get("pollingStation"));
-			allCitizens.add(c);
+			AbstractAgent a = createAgentByKind((String) user.get("name"), (String) user.get("location"), (String) user.get("email"), 
+					(String) user.get("identifier"), (int) user.get("kind"));
+			allAgents.add(a);
 		}
 
-		return allCitizens;
+		return allAgents;
 	}
 
 	/**
@@ -205,6 +197,36 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	public void cleanDatabase() {
 		users.remove(new BasicDBObject());
 
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @param location
+	 * @param email
+	 * @param identifier
+	 * @param kind
+	 * @return
+	 * 
+	 * 
+	 * Create an Agent depending on its kind
+	 * 
+	 */
+	private AbstractAgent createAgentByKind(String name, String location, String email, String identifier, int kind) {
+		//TODO: Si el kind no es uno de los que hemos puesto, ¿que debería pasar?
+		AbstractAgent a = null;
+		switch (kind) {
+		case 1:
+			a = new PersonAgent(name, location, email, identifier, kind);
+			break;
+		case 2:
+			a = new EntityAgent(name, location, email, identifier, kind);
+			break;
+		case 3: 
+			a = new SensorAgent(name, location, email, identifier, kind);
+			break;
+		}
+		return a;
 	}
 
 }

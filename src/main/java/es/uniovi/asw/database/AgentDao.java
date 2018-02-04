@@ -8,18 +8,18 @@ import es.uniovi.asw.parser.agents.AbstractAgent;
 /**
  * Interface for the methods that the DAO must accomplish
  * 
- * @author Gonzalo de la Cruz Fernández - UO244583
+ * @author Sergio Santano Álvarez - UO244858
  *
  */
-public interface CitizenDao {
+public interface AgentDao {
 
 	boolean insert(AbstractAgent c);
 
-	Citizen findById(String ID);
+	AbstractAgent findById(String ID);
 
 	void remove(String ID);
 
-	List<Citizen> findAll();
+	List<AbstractAgent> findAll();
 
 	void cleanDatabase();
 	//prueba

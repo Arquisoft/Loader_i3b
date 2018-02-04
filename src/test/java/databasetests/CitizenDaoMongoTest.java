@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import es.uniovi.asw.database.CitizenDao;
-import es.uniovi.asw.database.CitizenDaoImplMongo;
+import es.uniovi.asw.database.AgentDao;
+import es.uniovi.asw.database.AgentDaoImplMongo;
 import es.uniovi.asw.parser.Citizen;
 
 public class CitizenDaoMongoTest {
@@ -18,11 +18,11 @@ public class CitizenDaoMongoTest {
 	private Citizen dummy;
 	private Citizen dummy1;
 	private Citizen dummy2;
-	private static CitizenDao dao;
+	private static AgentDao dao;
 
 	@BeforeClass
 	public static void setUp() {
-		dao = new CitizenDaoImplMongo("localhost", 27017, "test", "test");
+		dao = new AgentDaoImplMongo("localhost", 27017, "test", "test");
 		dao.cleanDatabase();
 	}
 
