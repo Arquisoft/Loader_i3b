@@ -106,6 +106,7 @@ public class AgentDaoImplMongo implements AgentDao {
 
 	@Override
 	public boolean insert(AbstractAgent a) {
+		//Puede que el problema esté en ese basic object
 		BasicDBObject document = new BasicDBObject();
 		document.put("name", a.getName());
 		document.put("location", a.getLocation());
