@@ -20,6 +20,7 @@ public class PasswordGenerator {
 						.charAt(rnd.nextInt(passCharacters.length())));
 			}
 			c.setPassword(sb.toString());
+			sb.setLength(0);
 		}
 	}
 
