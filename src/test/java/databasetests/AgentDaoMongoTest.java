@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import es.uniovi.asw.database.AgentDao;
 import es.uniovi.asw.database.AgentDaoImplMongo;
+import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.agents.EntityAgent;
 import es.uniovi.asw.parser.agents.PersonAgent;
 import es.uniovi.asw.parser.agents.SensorAgent;
@@ -24,22 +25,19 @@ public class AgentDaoMongoTest {
 
 	@BeforeClass
 	public static void setUp() {
-		dao = new AgentDaoImplMongo("localhost", 27017, "test", "test");
+		dao = new AgentDaoImplMongo("localhost", 27017, "test_db", "agent_test");
 		dao.cleanDatabase();
 	}
 
 	@Before
 	public void insertCitizen() {
-		dummy = new Citizen("a", "b", "a@a.com", "10/10/2010", "a", "a",
-				"123456789Z", "132456789", 1234);
-		dummy1 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a", "a", "2",
-				"132456789", 1234);
-		dummy2 = new Citizen("a", "b", "c@a.com", "10/10/2010", "a", "a", "3",
-				"132456789", 1234);
+		dummy = new PersonAgent("a", "45,-1", "prueba@email.com", "12345678A", 1);
+		dummy1 = new EntityAgent("b", "45,-1", "prueba@email.com", "12345678B", 2);
+		dummy2 = new SensorAgent("c", "45,-1", "prueba@email.com", "12345678C", 3);
 	}
 
 	@After
-	public void deleteCitizens() {
+	public void deleteAgents() {
 		dao.cleanDatabase();
 	}
 
@@ -47,16 +45,16 @@ public class AgentDaoMongoTest {
 	public void testInsert() {
 
 		dao.insert(dummy);
-		List<Citizen> citizens = dao.findAll();
+		List<AbstractAgent> agents = dao.findAll();
 
-		assertEquals(citizens.size(), 1);
+		assertEquals(agents.size(), 1);
 
 		dao.insert(dummy1);
 		dao.insert(dummy2);
 
-		citizens = dao.findAll();
+		agents = dao.findAll();
 
-		assertEquals(citizens.size(), 3);
+		assertEquals(agents.size(), 3);
 
 	}
 
@@ -66,26 +64,26 @@ public class AgentDaoMongoTest {
 		dao.insert(dummy2);
 		dao.insert(dummy1);
 
-		List<Citizen> citizens = dao.findAll();
+		List<AbstractAgent> agents = dao.findAll();
 
-		assertEquals(citizens.size(), 3);
+		assertEquals(agents.size(), 3);
 
-		assertTrue(citizens.contains(dummy));
-		assertTrue(citizens.contains(dummy1));
-		assertTrue(citizens.contains(dummy2));
+		assertTrue(agents.contains(dummy));
+		assertTrue(agents.contains(dummy1));
+		assertTrue(agents.contains(dummy2));
 	}
 
 	@Test
 	public void testFindById() {
 		dao.insert(dummy);
 
-		Citizen c = dao.findById("1");
+		AbstractAgent a = dao.findById("1");
 
-		assertNull(c);
+		assertNull(a);
 
-		c = dao.findById("123456789Z");
-		assertNotNull(c);
-		assertEquals(dummy, c);
+		a = dao.findById("12345678A");
+		assertNotNull(a);
+		assertEquals(dummy, a);
 	}
 
 	@Test
@@ -94,43 +92,43 @@ public class AgentDaoMongoTest {
 		dao.insert(dummy1);
 		dao.insert(dummy2);
 
-		List<Citizen> citizens = dao.findAll();
+		List<AbstractAgent> agents = dao.findAll();
 
-		assertEquals(citizens.size(), 3);
+		assertEquals(agents.size(), 3);
 
 		dao.remove("1");
 
-		assertTrue(citizens.contains(dummy));
-		assertTrue(citizens.contains(dummy1));
-		assertTrue(citizens.contains(dummy2));
+		assertTrue(agents.contains(dummy));
+		assertTrue(agents.contains(dummy1));
+		assertTrue(agents.contains(dummy2));
 
-		citizens = dao.findAll();
+		agents = dao.findAll();
 
-		assertEquals(citizens.size(), 3);
+		assertEquals(agents.size(), 3);
 
-		assertTrue(citizens.contains(dummy));
-		assertTrue(citizens.contains(dummy1));
-		assertTrue(citizens.contains(dummy2));
+		assertTrue(agents.contains(dummy));
+		assertTrue(agents.contains(dummy1));
+		assertTrue(agents.contains(dummy2));
 
-		dao.remove("2");
+		dao.remove("12345678B");
 
-		citizens = dao.findAll();
+		agents = dao.findAll();
 
-		assertEquals(citizens.size(), 2);
+		assertEquals(agents.size(), 2);
 
-		assertTrue(citizens.contains(dummy));
-		assertFalse(citizens.contains(dummy1));
-		assertTrue(citizens.contains(dummy2));
+		assertTrue(agents.contains(dummy));
+		assertFalse(agents.contains(dummy1));
+		assertTrue(agents.contains(dummy2));
 
-		dao.remove("3");
+		dao.remove("12345678C");
 
-		citizens = dao.findAll();
+		agents = dao.findAll();
 
-		assertEquals(citizens.size(), 1);
+		assertEquals(agents.size(), 1);
 
-		assertTrue(citizens.contains(dummy));
-		assertFalse(citizens.contains(dummy1));
-		assertFalse(citizens.contains(dummy2));
+		assertTrue(agents.contains(dummy));
+		assertFalse(agents.contains(dummy1));
+		assertFalse(agents.contains(dummy2));
 
 	}
 
@@ -141,9 +139,9 @@ public class AgentDaoMongoTest {
 		dao.insert(dummy);
 		dao.insert(dummy);
 
-		List<Citizen> citizens = dao.findAll();
+		List<AbstractAgent> agents = dao.findAll();
 
-		assertEquals(citizens.size(), 1);
+		assertEquals(agents.size(), 1);
 	}
 
 }

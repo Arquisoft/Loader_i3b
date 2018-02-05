@@ -49,6 +49,7 @@ public abstract class AbstractReadList implements ReadList {
 
 	private void insertCitizens(Set<AbstractAgent> census) {
 		AgentDao dao = MongoPersistanceFactory.getAgentDAO();
+		dao.cleanDatabase();
 		for (AbstractAgent c : census) {
 			if (dao.insert(c)) {
 				letterGen.generatePersonalLetter(c);
