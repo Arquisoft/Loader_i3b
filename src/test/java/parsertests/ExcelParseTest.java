@@ -13,11 +13,12 @@ import org.junit.Test;
 
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
+import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.readers.ExcelReadList;
 
 public class ExcelParseTest {
 
-	private Set<Citizen> readData;
+	private Set<AbstractAgent> readData;
 
 	@Test
 	public void testParse() {

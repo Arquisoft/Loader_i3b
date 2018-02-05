@@ -1,5 +1,10 @@
 package es.uniovi.asw.parser.agents;
 
+/**
+ * 
+ * @author Jorge. Class used to represent abstract Agents and parse their data.
+ *
+ */
 public abstract class AbstractAgent {
 	protected String name;
 	protected String location;
