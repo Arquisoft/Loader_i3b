@@ -11,13 +11,15 @@ import org.junit.Test;
 
 import es.uniovi.asw.database.AgentDao;
 import es.uniovi.asw.database.AgentDaoImplMongo;
-import es.uniovi.asw.parser.Citizen;
+import es.uniovi.asw.parser.agents.EntityAgent;
+import es.uniovi.asw.parser.agents.PersonAgent;
+import es.uniovi.asw.parser.agents.SensorAgent;
 
-public class CitizenDaoMongoTest {
+public class AgentDaoMongoTest {
 
-	private Citizen dummy;
-	private Citizen dummy1;
-	private Citizen dummy2;
+	private PersonAgent dummy;
+	private EntityAgent dummy1;
+	private SensorAgent dummy2;
 	private static AgentDao dao;
 
 	@BeforeClass

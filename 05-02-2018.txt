@@ -1,0 +1,72 @@
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:53:45
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:53:45
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:53:45
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:55:28
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:55:28
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:55:28
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:56:43
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:56:43
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 15:56:43
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users index: id_1 dup key: { : null }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 16:05:19
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users_agents index: identifier_1 dup key: { : "id3" }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 16:05:19
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users_agents index: identifier_1 dup key: { : "id1" }'
+
+ERROR 
+------------------------------
+Date and hour: 05-02-2018 16:05:19
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: Agents.users_agents index: identifier_1 dup key: { : "id2" }'
+

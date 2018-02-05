@@ -52,7 +52,7 @@ public class AgentDaoImplMongo implements AgentDao {
 			this.db = mongo.getDB(properties.getProperty("database"));
 			this.users = db.getCollection(properties.getProperty("collection"));
 
-			users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
+			users.createIndex(new BasicDBObject("identifier", 1), new BasicDBObject(
 					"unique", true));
 		}
 	}
@@ -91,7 +91,7 @@ public class AgentDaoImplMongo implements AgentDao {
 		this.db = mongo.getDB(database);
 		this.users = db.getCollection(collection);
 
-		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
+		users.createIndex(new BasicDBObject("identifier", 1), new BasicDBObject(
 				"unique", true));
 	}
 
@@ -139,7 +139,7 @@ public class AgentDaoImplMongo implements AgentDao {
 	@Override
 	public void remove(String ID) {
 		BasicDBObject document = new BasicDBObject();
-		document.put("id", ID);
+		document.put("identifier", ID);
 		users.remove(document);
 	}
 
@@ -155,7 +155,7 @@ public class AgentDaoImplMongo implements AgentDao {
 	@Override
 	public AbstractAgent findById(String ID) {
 		BasicDBObject whereQuery = new BasicDBObject();
-		whereQuery.put("id", ID);
+		whereQuery.put("identifier", ID);
 		DBCursor cursor = users.find(whereQuery);
 		AbstractAgent a = null;
 		while (cursor.hasNext()) {
