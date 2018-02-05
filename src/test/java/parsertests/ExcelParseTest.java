@@ -35,7 +35,6 @@ public class ExcelParseTest {
 	
 	@Test
 	public void testParse() {
-		clearDatabase();
 		String result = "[Person [Name=PersonName, location=45,-1, "
 				+ "email=person@example.com, identifier=id1]]";
 
