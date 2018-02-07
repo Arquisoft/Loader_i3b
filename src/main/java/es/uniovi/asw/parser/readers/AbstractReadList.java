@@ -15,7 +15,7 @@ import es.uniovi.asw.reportwriter.WriteReport;
 import es.uniovi.asw.reportwriter.WriteReportDefault;
 
 /**
- * @author Oriol Template, concrete parsers (Excel/Word/txt/...) will override
+ * @author Jorge Template, concrete parsers (Excel/Word/txt/...) will override
  *         "doParse".
  */
 public abstract class AbstractReadList implements ReadList {
@@ -33,6 +33,10 @@ public abstract class AbstractReadList implements ReadList {
 	public AbstractReadList(LetterGenerator letterGenerator) {
 		this.letterGen = letterGenerator;
 		this.wReport = new WriteReportDefault();
+	}
+	
+	public HashMap<Integer, String> getMasterKinds() {
+		return masterKinds;
 	}
 
 	@Override
@@ -58,9 +62,10 @@ public abstract class AbstractReadList implements ReadList {
 	}
 
 	@Override
-	public void parseMaster(String ruta) {
+	public HashMap<Integer, String> parseMaster(String ruta) {
 
 		doParseMaster(ruta);
+		return masterKinds;
 
 	}
 	protected abstract void doParse(String ruta);

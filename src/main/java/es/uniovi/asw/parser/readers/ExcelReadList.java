@@ -18,6 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.agents.EntityAgent;
+import es.uniovi.asw.parser.agents.GeneralAgent;
 import es.uniovi.asw.parser.agents.PersonAgent;
 import es.uniovi.asw.parser.agents.SensorAgent;
 import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
@@ -80,6 +81,7 @@ public class ExcelReadList extends AbstractReadList {
 						case "Person" : agent = new PersonAgent(data); break;
 						case "Entity" : agent = new EntityAgent(data); break;
 						case "Sensor" : agent = new SensorAgent(data); break;
+						default: agent = new GeneralAgent(data); break;
 						}
 						if (agentsCensus.contains(agent)) {
 							wReport.report("Duplicated agent on row number " + r, ruta);
@@ -180,6 +182,5 @@ public class ExcelReadList extends AbstractReadList {
 		}
 		return null;
 	}
-
 
 }

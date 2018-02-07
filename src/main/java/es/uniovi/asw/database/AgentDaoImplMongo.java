@@ -17,6 +17,7 @@ import com.mongodb.MongoException;
 
 import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.agents.EntityAgent;
+import es.uniovi.asw.parser.agents.GeneralAgent;
 import es.uniovi.asw.parser.agents.PersonAgent;
 import es.uniovi.asw.parser.agents.SensorAgent;
 import es.uniovi.asw.reportwriter.WriteReport;
@@ -226,6 +227,8 @@ public class AgentDaoImplMongo implements AgentDao {
 		case 3: 
 			a = new SensorAgent(name, location, email, identifier, kind);
 			break;
+		default:
+			a = new GeneralAgent(name, location, email, identifier, kind);
 		}
 		return a;
 	}
