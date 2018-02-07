@@ -21,7 +21,7 @@ public class GeneralAgent extends AbstractAgent {
 	public String toString() {
 		ReadList rl = SingletonParser.getInstance().getDefaultExcelReadList();
 		String kind = rl.getMasterKinds().get(this.kind);
-		return kind + " [Name=" + this.name
+		return kind + " Agent [Name=" + this.name
 				+ ", location=" + this.location
 				+ ", email=" + this.email
 				+ ", identifier=" + this.identifier

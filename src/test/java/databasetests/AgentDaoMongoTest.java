@@ -26,6 +26,7 @@ public class AgentDaoMongoTest {
 	private EntityAgent dummy1;
 	private SensorAgent dummy2;
 	private GeneralAgent dummy3;
+	private PersonAgent dummy4;
 	private static AgentDao dao;
 
 	@BeforeClass
@@ -40,6 +41,8 @@ public class AgentDaoMongoTest {
 		dummy1 = new EntityAgent("b", "45,-1", "prueba@email.com", "12345678B", 2);
 		dummy2 = new SensorAgent("c", "45,-1", "prueba@email.com", "12345678C", 3);
 		dummy3 = new GeneralAgent("c", "45,-1", "prueba@email.com", "12345678D", 4);
+		dummy4 = new PersonAgent("c", "", "prueba@email.com", "12345678D", 1);
+		
 		SingletonParser.getInstance().getDefaultExcelReadList().parseMaster("src/test/resources/masterTest.xlsx");
 	}
 
@@ -153,6 +156,38 @@ public class AgentDaoMongoTest {
 		List<AbstractAgent> agents = dao.findAll();
 
 		assertEquals(agents.size(), 1);
+		
+		//We test if after removing it from the database we can add it		
+		dao.remove(dummy.getIdentifier());
+		
+		agents = dao.findAll();
+		
+		assertEquals(agents.size(), 0);
+		
+		dao.insert(dummy);
+		dao.insert(dummy);
+		
+		agents = dao.findAll();
+		
+		assertEquals(agents.size(), 1);
+	}
+	
+	@Test
+	public void testEmptyFields() {
+		dao.insert(dummy4);
+		List<AbstractAgent> agents = dao.findAll();
+		AbstractAgent a = agents.get(0);
+		assertEquals(dummy4.toString(), a.toString());
+		
+	}
+	
+	@Test
+	public void testGeneralAgents() {
+		dao.insert(dummy3);
+		List<AbstractAgent> agents = dao.findAll();
+		AbstractAgent a = agents.get(0);
+		String kind = a.toString().split(" ")[0];
+		assertEquals("Company", kind);
 	}
 
 }

@@ -215,7 +215,6 @@ public class AgentDaoImplMongo implements AgentDao {
 	 * 
 	 */
 	private AbstractAgent createAgentByKind(String name, String location, String email, String identifier, int kind) {
-		//TODO: Si el kind no es uno de los que hemos puesto, ¿que debería pasar?
 		AbstractAgent a = null;
 		switch (kind) {
 		case 1:

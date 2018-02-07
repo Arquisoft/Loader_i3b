@@ -16,7 +16,7 @@ public class PersonAgent extends AbstractAgent {
 	}
 
 	public String toString() {
-		return "Person [Name=" + this.name
+		return "Person Agent [Name=" + this.name
 				+ ", location=" + this.location
 				+ ", email=" + this.email
 				+ ", identifier=" + this.identifier

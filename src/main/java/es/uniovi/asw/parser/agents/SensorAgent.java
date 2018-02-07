@@ -16,7 +16,7 @@ public class SensorAgent extends AbstractAgent {
 	}
 
 	public String toString() {
-		return "Sensor [Name=" + this.name
+		return "Sensor Agent [Name=" + this.name
 				+ ", location=" + this.location
 				+ ", email=" + this.email
 				+ ", identifier=" + this.identifier

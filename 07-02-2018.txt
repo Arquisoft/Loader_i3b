@@ -1,0 +1,162 @@
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:29:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:29:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:29:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:31:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:31:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:31:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:31:25
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:03
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:03
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:03
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:03
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:18
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:18
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:18
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:33:18
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:35:32
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:35:32
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:35:32
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:35:32
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:07
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:07
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:07
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:07
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:26
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:26
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:26
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+
+ERROR 
+------------------------------
+Date and hour: 07-02-2018 21:36:26
+Error: Error inserting in the database: The inserted Key is in the database
+Message exception: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test_db.agent_test index: identifier_1 dup key: { : "12345678A" }'
+

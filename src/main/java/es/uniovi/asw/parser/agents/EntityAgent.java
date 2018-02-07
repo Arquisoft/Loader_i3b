@@ -17,7 +17,7 @@ public class EntityAgent extends AbstractAgent {
 	}
 
 	public String toString() {
-		return "Entity [Name=" + this.name
+		return "Entity Agent [Name=" + this.name
 				+ ", location=" + this.location
 				+ ", email=" + this.email
 				+ ", identifier=" + this.identifier
