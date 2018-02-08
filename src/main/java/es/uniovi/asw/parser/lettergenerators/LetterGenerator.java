@@ -1,6 +1,6 @@
 package es.uniovi.asw.parser.lettergenerators;
 
-import es.uniovi.asw.parser.agents.AbstractAgent;
+import es.uniovi.asw.parser.Citizen;
 
 /**
  * @author Oriol 
@@ -10,5 +10,5 @@ import es.uniovi.asw.parser.agents.AbstractAgent;
  * using other formats like Microsoft Word or PDF.
  */
 public interface LetterGenerator {
-	void generatePersonalLetter(AbstractAgent c);
+	void generatePersonalLetter(Citizen c);
 }

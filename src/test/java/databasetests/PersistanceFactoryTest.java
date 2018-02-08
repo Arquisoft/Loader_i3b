@@ -10,7 +10,7 @@ public class PersistanceFactoryTest {
 
 	@Test
 	public void test() {
-		assertNotNull(MongoPersistanceFactory.getAgentDAO());
+		assertNotNull(MongoPersistanceFactory.getCitizenDao());
 		MongoPersistanceFactory p = new MongoPersistanceFactory();
 		assertNotNull(p);
 	}

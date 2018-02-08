@@ -1,5 +1,6 @@
 package es.uniovi.asw.parser.lettergenerators;
 
+import es.uniovi.asw.parser.Citizen;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,8 +8,6 @@ import java.io.IOException;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-
-import es.uniovi.asw.parser.agents.AbstractAgent;
 
 public class WordLetterGenerator implements LetterGenerator {
 	
@@ -19,19 +18,19 @@ public class WordLetterGenerator implements LetterGenerator {
 	 * the data of a given citizen.
 	 */
 	@Override
-	public void generatePersonalLetter(AbstractAgent c) {
+	public void generatePersonalLetter(Citizen c) {
 		// Blank Document
 		XWPFDocument document = new XWPFDocument();
 
 		// Write the Document in file system
 		FileOutputStream out;
 		try {
-			out = new FileOutputStream(new File(c.getIdentifier()+".docx"));
+			out = new FileOutputStream(new File(c.getID()+".docx"));
 			XWPFParagraph paragraph = document.createParagraph();
 			XWPFRun runNames = paragraph.createRun();
 			
 			//Add text to the document 
-			runNames.setText("Mr/Mrs " + c.getName());
+			runNames.setText("Mr/Mrs " + c.getName() + " " + c.getlastName() +",");
 			runNames.addBreak();
 			
 			XWPFRun runLogin = paragraph.createRun();

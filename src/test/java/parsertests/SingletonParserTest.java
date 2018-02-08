@@ -30,6 +30,21 @@ public class SingletonParserTest {
 				getPDFLetterExcelReadList());
 	}
 	
-
+	@Test
+	public void testGetTxtParserDefault() {
+		assertNotNull(SingletonParser.getInstance().getDefaultTxtReadList());
+	}
+	
+	@Test
+	public void testGetTxtParserWord() {
+		assertNotNull(SingletonParser.getInstance().
+				getWordLetterTxtReadList());
+	}
+	
+	@Test
+	public void testGetTxtParserPdf() {
+		assertNotNull(SingletonParser.getInstance().
+				getPDFLetterTxtReadList());
+	}
 
 }

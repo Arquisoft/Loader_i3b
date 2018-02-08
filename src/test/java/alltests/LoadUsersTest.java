@@ -20,20 +20,21 @@ public class LoadUsersTest {
 	public void clearDatabase() {
 		@SuppressWarnings("resource")
 		MongoClient mongoClient = new MongoClient("localhost", 27017);
-		MongoDatabase db = mongoClient.getDatabase("Agents");
-		db.getCollection("agents").deleteMany(new Document());
+		MongoDatabase db = mongoClient.getDatabase("Citizens");
+		db.getCollection("users").deleteMany(new Document());
 	}
 
 	@Test
-	public void testRunInsert() {		// Clears the database before the test.
+	public void testRunInsert() {
+		// Clears the database before the test.
 		clearDatabase();
 
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		// Tests how the data is inserted correctly into the database for the
 		// first time.
 		System.setOut(new PrintStream(outContent));
-		LoadUsers.main("src/test/resources/masterTest.csv", "src/test/resources/test.xlsx");
-		assertTrue(outContent.toString().contains("id1 letter sent."));
+		LoadUsers.main("src/test/resources/test2.xlsx");
+		assertTrue(outContent.toString().contains("90500084Y letter sent."));
 
 	}
 

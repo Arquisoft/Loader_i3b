@@ -9,52 +9,43 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.assertj.core.util.Files;
+import org.bson.Document;
+import org.junit.Before;
 import org.junit.Test;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
-import es.uniovi.asw.parser.readers.ExcelReadList;
+import es.uniovi.asw.parser.readers.TxtReadList;
 
-public class ExcelParseTest {
+public class TxtParseTest {
 
 	private Set<Citizen> readData;
 
-	@Test
-	public void testParse() {
-		String result = "[Citizen [firstName=Juan, lastName=Torres"
-				+ " Pardo, email=juan@example.com, birthDate=Thu Oct"
-				+ " 10 00:00:00 CET 1985, address=C/ Federico García Lorca 2,"
-				+ " ID=90500084Y, "
-				+ "nationality=Español, NIF=1.0, pollingStation=1]]";
-		String resultForTravis = "[Citizen [firstName=Juan, lastName=Torres"
-				+ " Pardo, email=juan@example.com, birthDate=Thu Oct"
-				+ " 10 00:00:00 UTC 1985, address=C/ Federico García Lorca 2,"
-				+ " ID=90500084Y, "
-				+ "nationality=Español, NIF=1.0, pollingStation=1]]";
-
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test2.xlsx");
-
-		assertTrue(readData.toString().equals(result)
-				|| readData.toString().equals(resultForTravis));
+	@Before
+	public void clearDatabase() {
+		@SuppressWarnings("resource")
+		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoDatabase db = mongoClient.getDatabase("Citizens");
+		db.getCollection("users").deleteMany(new Document());
 	}
 
 	@Test
-	/**
-	 * Checks whether the file exists or not.
-	 * 
-	 */
-	public void fileNotFound() {
-		SimpleDateFormat formatofilename = new SimpleDateFormat("dd-MM-yyyy",
-				Locale.getDefault());
-		String filename = formatofilename.format(new Date()) + ".txt";
-		File file = new File(filename);
+	public void testParse() {
+		clearDatabase();
+		String resultSt = "[Citizen [firstName=adri, lastName=miron, email=testemail@uniovi.es, "
+				+ "birthDate=Sun May 19 00:00:00 CEST 1996, address=C/Asturias, "
+				+ "ID=testid, nationality=camboya, NIF=1234, pollingStation=1]]";
+		String resultTravis = "[Citizen [firstName=adri, lastName=miron, email=testemail@uniovi.es, "
+				+ "birthDate=Sun May 19 00:00:00 UTC 1996, address=C/Asturias, "
+				+ "ID=testid, nationality=camboya, NIF=1234, pollingStation=1]]";
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test.txt");
+		assertTrue(readData.toString().equals(resultSt)
+				|| readData.toString().equals(resultTravis));
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("archivoQueNoExiste");
-
-		assertTrue(file.exists());
-		Files.delete(file);
 	}
 
 	@Test
@@ -68,8 +59,8 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test3.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test3.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
@@ -87,8 +78,8 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test4.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test4.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
@@ -106,8 +97,8 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test5.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test5.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
@@ -125,8 +116,8 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test6.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test6.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
@@ -144,8 +135,8 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test7.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test7.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
@@ -163,15 +154,15 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test8.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test8.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
 	}
 
 	/**
-	 * Checks that the report file is generated when the excel has a blank row.
+	 * Checks that the report file is generated when the txt has a blank row
 	 * 
 	 */
 	@Test
@@ -181,8 +172,8 @@ public class ExcelParseTest {
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test10.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test10.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);
@@ -193,14 +184,14 @@ public class ExcelParseTest {
 	 * 
 	 */
 	@Test
-	public void testNoDuplicate() {
+	public void testDuplicate() {
 		SimpleDateFormat formatofilename = new SimpleDateFormat("dd-MM-yyyy",
 				Locale.getDefault());
 		String filename = formatofilename.format(new Date()) + ".txt";
 		File file = new File(filename);
 
-		ReadList rl = new ExcelReadList();
-		readData = rl.parse("src/test/resources/test9.xlsx");
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test9.txt");
 
 		assertTrue(file.exists());
 		Files.delete(file);

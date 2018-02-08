@@ -15,21 +15,17 @@ import com.mongodb.DuplicateKeyException;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
-import es.uniovi.asw.parser.agents.AbstractAgent;
-import es.uniovi.asw.parser.agents.EntityAgent;
-import es.uniovi.asw.parser.agents.GeneralAgent;
-import es.uniovi.asw.parser.agents.PersonAgent;
-import es.uniovi.asw.parser.agents.SensorAgent;
+import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.reportwriter.WriteReport;
 import es.uniovi.asw.reportwriter.WriteReportDefault;
 
 /**
  * DAO implementation for MongoDB database
  * 
- * @author Sergio Santano Álvarez - UO244858
+ * @author Gonzalo de la Cruz Fernández - UO244583
  *
  */
-public class AgentDaoImplMongo implements AgentDao {
+public class CitizenDaoImplMongo implements CitizenDao {
 
 
 	private MongoClient mongo;
@@ -43,7 +39,7 @@ public class AgentDaoImplMongo implements AgentDao {
 	 * specified above
 	 */
 	@SuppressWarnings("deprecation")
-	public AgentDaoImplMongo() {
+	public CitizenDaoImplMongo() {
 		
 		if (loadProperties()) {
 
@@ -53,7 +49,7 @@ public class AgentDaoImplMongo implements AgentDao {
 			this.db = mongo.getDB(properties.getProperty("database"));
 			this.users = db.getCollection(properties.getProperty("collection"));
 
-			users.createIndex(new BasicDBObject("identifier", 1), new BasicDBObject(
+			users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
 					"unique", true));
 		}
 	}
@@ -85,20 +81,20 @@ public class AgentDaoImplMongo implements AgentDao {
 	 * @param collection
 	 */
 	@SuppressWarnings("deprecation")
-	public AgentDaoImplMongo(String host, int port, String database,
+	public CitizenDaoImplMongo(String host, int port, String database,
 			String collection) {
 		this.reporter = new WriteReportDefault();
 		this.mongo = new MongoClient(host, port);
 		this.db = mongo.getDB(database);
 		this.users = db.getCollection(collection);
 
-		users.createIndex(new BasicDBObject("identifier", 1), new BasicDBObject(
+		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
 				"unique", true));
 	}
 
 	/**
 	 * 
-	 * @param a
+	 * @param c
 	 * 
 	 *            Inserts a new document into the database with the citizen
 	 *            passed as a parameter.
@@ -106,18 +102,21 @@ public class AgentDaoImplMongo implements AgentDao {
 	 */
 
 	@Override
-	public boolean insert(AbstractAgent a) {
-		//Puede que el problema esté en ese basic object
+	public boolean insert(Citizen c) {
 		BasicDBObject document = new BasicDBObject();
-		document.put("name", a.getName());
-		document.put("location", a.getLocation());
-		document.put("email", a.getEmail());
-		document.put("identifier", a.getIdentifier());
-		document.put("kind", a.getKind());
-		document.put("password", a.getPassword());
+		document.put("firstName", c.getName());
+		document.put("lastName", c.getlastName());
+		document.put("email", c.getEmail());
+		document.put("password", c.getPassword());
+		document.put("dateOfBirth", c.getbirthDate());
+		document.put("address", c.getAddress());
+		document.put("nationality", c.getNationality());
+		document.put("id", c.getID());
+		document.put("nif", c.getNIF());
+		document.put("pollingStation", c.getpollingStation());
 		try {
 			users.insert(document);
-			reporter.logDatabaseInsertion(a);
+			reporter.logDatabaseInsertion(c);
 			return true;
 		} catch (DuplicateKeyException me) {
 			reporter.report(me, "Error inserting in the database: "
@@ -140,7 +139,7 @@ public class AgentDaoImplMongo implements AgentDao {
 	@Override
 	public void remove(String ID) {
 		BasicDBObject document = new BasicDBObject();
-		document.put("identifier", ID);
+		document.put("id", ID);
 		users.remove(document);
 	}
 
@@ -154,17 +153,20 @@ public class AgentDaoImplMongo implements AgentDao {
 	 */
 
 	@Override
-	public AbstractAgent findById(String ID) {
+	public Citizen findById(String ID) {
 		BasicDBObject whereQuery = new BasicDBObject();
-		whereQuery.put("identifier", ID);
+		whereQuery.put("id", ID);
 		DBCursor cursor = users.find(whereQuery);
-		AbstractAgent a = null;
+		Citizen c = null;
 		while (cursor.hasNext()) {
 			DBObject user = cursor.next();
-			a = createAgentByKind((String) user.get("name"), (String) user.get("location"), (String) user.get("email"), 
-						(String) user.get("identifier"), (int) user.get("kind"));
+			c = new Citizen((String) user.get("firstName"), (String) user.get(
+					"lastName"), (String) user.get("email"), (Date) user.get(
+							"dateOfBirth"), (String) user.get("address"),
+					(String) user.get("nationality"), (String) user.get("id"),
+					(String) user.get("nif"), (int) user.get("pollingStation"));
 		}
-		return a;
+		return c;
 	}
 
 	/**
@@ -174,19 +176,23 @@ public class AgentDaoImplMongo implements AgentDao {
 	 */
 
 	@Override
-	public List<AbstractAgent> findAll() {
+	public List<Citizen> findAll() {
 
-		List<AbstractAgent> allAgents = new ArrayList<>();
+		List<Citizen> allCitizens = new ArrayList<>();
 
 		DBCursor cursor = users.find();
 		while (cursor.hasNext()) {
 			DBObject user = cursor.next();
-			AbstractAgent a = createAgentByKind((String) user.get("name"), (String) user.get("location"), (String) user.get("email"), 
-					(String) user.get("identifier"), (int) user.get("kind"));
-			allAgents.add(a);
+			Citizen c = new Citizen((String) user.get("firstName"),
+					(String) user.get("lastName"), (String) user.get("email"),
+					(Date) user.get("dateOfBirth"), (String) user.get(
+							"address"), (String) user.get("nationality"),
+					(String) user.get("id"), (String) user.get("nif"),
+					(int) user.get("pollingStation"));
+			allCitizens.add(c);
 		}
 
-		return allAgents;
+		return allCitizens;
 	}
 
 	/**
@@ -199,37 +205,6 @@ public class AgentDaoImplMongo implements AgentDao {
 	public void cleanDatabase() {
 		users.remove(new BasicDBObject());
 
-	}
-	
-	/**
-	 * 
-	 * @param name
-	 * @param location
-	 * @param email
-	 * @param identifier
-	 * @param kind
-	 * @return
-	 * 
-	 * 
-	 * Create an Agent depending on its kind
-	 * 
-	 */
-	private AbstractAgent createAgentByKind(String name, String location, String email, String identifier, int kind) {
-		AbstractAgent a = null;
-		switch (kind) {
-		case 1:
-			a = new PersonAgent(name, location, email, identifier, kind);
-			break;
-		case 2:
-			a = new EntityAgent(name, location, email, identifier, kind);
-			break;
-		case 3: 
-			a = new SensorAgent(name, location, email, identifier, kind);
-			break;
-		default:
-			a = new GeneralAgent(name, location, email, identifier, kind);
-		}
-		return a;
 	}
 
 }

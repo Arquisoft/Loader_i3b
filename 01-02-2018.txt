@@ -1,4 +1,4 @@
-ERROR
+ERROR 
 ------------------------------
 Date and hour: 01-02-2018 17:39:02
 Filename: src/test/resources/test9.xlsx
