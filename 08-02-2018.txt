@@ -1,6 +1,0 @@
-ERROR 
-------------------------------
-Date and hour: 08-02-2018 10:22:20
-Filename: src/test/resources/test.xlsx
-Error: Null name on row number 5
-

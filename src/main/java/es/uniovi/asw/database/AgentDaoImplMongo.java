@@ -98,7 +98,7 @@ public class AgentDaoImplMongo implements AgentDao {
 
 	/**
 	 * 
-	 * @param c
+	 * @param a
 	 * 
 	 *            Inserts a new document into the database with the citizen
 	 *            passed as a parameter.
