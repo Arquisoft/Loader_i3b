@@ -1,7 +1,9 @@
 package es.uniovi.asw.parser.readers;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -125,32 +127,26 @@ public class ExcelReadList extends AbstractReadList {
 
 	@Override
 	protected void doParseMaster(String ruta) {
-		XSSFWorkbook wb = null;
-		XSSFSheet sheet;
-		XSSFRow row;
+        String line = "";
+        String cvsSplitBy = ",";
+        masterKinds = new HashMap<Integer,String>();
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
 
-		try {
-			FileInputStream file = new FileInputStream(ruta);
+            while ((line = br.readLine()) != null) {
 
-			wb = new XSSFWorkbook(OPCPackage.open(file));
-			sheet = wb.getSheetAt(0);
-			masterKinds = new HashMap<Integer,String>();
+                // use comma as separator
+                String[] lineData = line.split(cvsSplitBy);
+                String code = lineData[1];
+                int kind = Integer.parseInt(lineData[0]);
+                masterKinds.put(kind,code);
 
-			int rows = sheet.getPhysicalNumberOfRows();
+            }
 
-			int cols = 2; // Numeric code/User kind
+        }
 
-			for (int r = 1; r < rows; r++) {
-				row = sheet.getRow(r);
+		
 
-				Object[] data = parseMasterRow(row, cols);
-
-			masterKinds.put((Integer)data[0],(String) data[1]);
-
-			}
-
-			wb.close();
-		} catch (FileNotFoundException e) {
+		catch (FileNotFoundException e) {
 			wReport.report(e, "No se ha encontrado el archivo solicitado");
 		}
 
@@ -159,25 +155,6 @@ public class ExcelReadList extends AbstractReadList {
 		}
 		
 	}
-	@SuppressWarnings("deprecation")
-	private Object[] parseMasterRow(XSSFRow row, int cols) throws ParseException {
-		XSSFCell cell;
-		Object[] data = new Object[cols];
 
-		if (row != null) {
-			for (int c = 0; c < cols; c++) {
-				cell = row.getCell((short) c);
-				if (cell != null && !cell.toString().equals("")) {
-					if (cell.getCellTypeEnum() == CellType.NUMERIC ) {
-						data[c] = Double.valueOf(cell.toString()).intValue();
-					} else {
-						data[c] = cell.toString();
-					}
-				}
-			}
-			return data;
-		}
-		return null;
-	}
 
 }
