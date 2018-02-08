@@ -1,6 +1,5 @@
 package es.uniovi.asw.parser.lettergenerators;
 
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.agents.AbstractAgent;
 
 /**

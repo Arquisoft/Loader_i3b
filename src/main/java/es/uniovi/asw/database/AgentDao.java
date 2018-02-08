@@ -2,7 +2,6 @@ package es.uniovi.asw.database;
 
 import java.util.List;
 
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.agents.AbstractAgent;
 
 /**

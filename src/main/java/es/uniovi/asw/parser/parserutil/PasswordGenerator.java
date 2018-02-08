@@ -3,7 +3,6 @@ package es.uniovi.asw.parser.parserutil;
 import java.security.SecureRandom;
 import java.util.Set;
 
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.agents.AbstractAgent;
 
 public class PasswordGenerator {

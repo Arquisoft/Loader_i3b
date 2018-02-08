@@ -5,7 +5,6 @@ import java.util.Set;
 
 import es.uniovi.asw.database.AgentDao;
 import es.uniovi.asw.database.MongoPersistanceFactory;
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.lettergenerators.ConsoleLetterGenerator;

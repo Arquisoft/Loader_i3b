@@ -1,13 +1,12 @@
 package lettergeneratorstests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.assertj.core.util.Files;
 import org.junit.Test;
 
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.agents.PersonAgent;
 import es.uniovi.asw.parser.lettergenerators.PDFLetterGenerator;
 

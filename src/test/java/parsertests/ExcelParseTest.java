@@ -1,6 +1,6 @@
 package parsertests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,6 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.readers.ExcelReadList;

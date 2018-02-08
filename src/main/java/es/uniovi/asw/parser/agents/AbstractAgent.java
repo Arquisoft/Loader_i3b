@@ -1,7 +1,5 @@
 package es.uniovi.asw.parser.agents;
 
-import es.uniovi.asw.parser.Citizen;
-
 /**
  * 
  * @author Jorge. Class used to represent abstract Agents and parse their data.
