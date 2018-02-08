@@ -38,7 +38,7 @@ public class ExcelParseTest {
 				+ "email=person@example.com, identifier=id1]]";
 
 		ReadList rl = new ExcelReadList();
-		rl.parseMaster("src/test/resources/masterTest.xlsx");
+		rl.parseMaster("src/test/resources/masterTest.csv");
 		readData = rl.parse("src/test/resources/test2.xlsx");
 
 		assertTrue(readData.toString().equals(result)
@@ -51,7 +51,7 @@ public class ExcelParseTest {
 				+ "email=person@example.com, identifier=id1]]";
 
 		ReadList rl = new ExcelReadList();
-		rl.parseMaster("src/test/resources/masterTest.xlsx");
+		rl.parseMaster("src/test/resources/masterTest.csv");
 		readData = rl.parse("src/test/resources/test3.xlsx");
 
 		assertTrue(readData.toString().equals(result)

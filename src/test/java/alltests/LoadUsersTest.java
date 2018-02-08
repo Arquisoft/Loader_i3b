@@ -32,7 +32,7 @@ public class LoadUsersTest {
 		// Tests how the data is inserted correctly into the database for the
 		// first time.
 		System.setOut(new PrintStream(outContent));
-		LoadUsers.main("src/test/resources/masterTest.xlsx", "src/test/resources/test.xlsx");
+		LoadUsers.main("src/test/resources/masterTest.csv", "src/test/resources/test.xlsx");
 		assertTrue(outContent.toString().contains("id1 letter sent."));
 
 	}

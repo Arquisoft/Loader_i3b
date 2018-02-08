@@ -43,7 +43,7 @@ public class AgentDaoMongoTest {
 		dummy3 = new GeneralAgent("c", "45,-1", "prueba@email.com", "12345678D", 4);
 		dummy4 = new PersonAgent("c", "", "prueba@email.com", "12345678D", 1);
 		
-		SingletonParser.getInstance().getDefaultExcelReadList().parseMaster("src/test/resources/masterTest.xlsx");
+		SingletonParser.getInstance().getDefaultExcelReadList().parseMaster("src/test/resources/masterTest.csv");
 	}
 
 	@After
