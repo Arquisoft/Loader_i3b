@@ -1,13 +1,13 @@
 package lettergeneratorstests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.assertj.core.util.Files;
 import org.junit.Test;
 
-import es.uniovi.asw.parser.Citizen;
+import es.uniovi.asw.parser.agents.PersonAgent;
 import es.uniovi.asw.parser.lettergenerators.PDFLetterGenerator;
 
 public class PDFGeneratorTest {
@@ -15,10 +15,9 @@ public class PDFGeneratorTest {
 	@Test
 	public void testGeneratePDF() {
 		PDFLetterGenerator pdfg = new PDFLetterGenerator();
-		Citizen c = new Citizen("adri", "mc", "zoo@snek.com", "10/10/2010", "a",
-				"a", "123456789Z", "132456789", 1234);
-		pdfg.generatePersonalLetter(c);
-		File f = new File(c.getID() + ".pdf");
+		PersonAgent a = new PersonAgent("Sergio", "43,-5", "sergiosantano96@gmail.com", "71681354Z", 1);
+		pdfg.generatePersonalLetter(a);
+		File f = new File(a.getIdentifier() + ".pdf");
 		assertTrue(f.exists());
 		Files.delete(f);
 
