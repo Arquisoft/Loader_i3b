@@ -62,7 +62,7 @@ public class ExcelReadList extends AbstractReadList {
 
 					if (data[0] == null) {
 						wReport.report("Null name on row number " + r, ruta);
-					} else if (data[1] == null) {
+					} else if (data[1] == null && !(masterKinds.get(data[4]).equals("Person"))) {
 						wReport.report("Null location on row number " + r, ruta);
 					} else if (data[2] == null) {
 						wReport.report("Null email on row number " + r, ruta);

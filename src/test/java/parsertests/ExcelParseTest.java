@@ -44,6 +44,20 @@ public class ExcelParseTest {
 		assertTrue(readData.toString().equals(result)
 				);
 	}
+	
+	@Test
+	public void testParsePersonNoCoordinates() {
+		String result = "[Person Agent [Name=PersonName, location=null, "
+				+ "email=person@example.com, identifier=id1]]";
+
+		ReadList rl = new ExcelReadList();
+		rl.parseMaster("src/test/resources/masterTest.xlsx");
+		readData = rl.parse("src/test/resources/test3.xlsx");
+
+		assertTrue(readData.toString().equals(result)
+				);
+	}
+
 
 	@Test
 	/**
