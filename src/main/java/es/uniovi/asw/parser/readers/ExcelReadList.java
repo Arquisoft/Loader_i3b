@@ -1,24 +1,29 @@
 package es.uniovi.asw.parser.readers;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import es.uniovi.asw.parser.Citizen;
+import es.uniovi.asw.parser.agents.AbstractAgent;
+import es.uniovi.asw.parser.agents.EntityAgent;
+import es.uniovi.asw.parser.agents.GeneralAgent;
+import es.uniovi.asw.parser.agents.PersonAgent;
+import es.uniovi.asw.parser.agents.SensorAgent;
 import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
 
 /**
- * @author Oriol. Excel parser.
+ * @author Jorge. Excel parser.
  */
 public class ExcelReadList extends AbstractReadList {
 
@@ -42,41 +47,45 @@ public class ExcelReadList extends AbstractReadList {
 
 			wb = new XSSFWorkbook(OPCPackage.open(file));
 			sheet = wb.getSheetAt(0);
-			census = new HashSet<Citizen>();
+			agentsCensus = new HashSet<AbstractAgent>();
 
 			int rows = sheet.getPhysicalNumberOfRows();
 
-			int cols = 9; // Nombre/Apellidos/Email/Fecha
-							// nacimiento/Dirección/Nacionalidad/DNI/NIF/Polling
-							// code
+			int cols = 5; 
 
 			for (int r = 1; r < rows; r++) {
 				row = sheet.getRow(r);
 
-				String[] data = parseRow(row, cols);
+				Object[] data = parseRow(row, cols);
 
-				Citizen cit = null;
+				AbstractAgent agent = null;
 
 				if (data != null) {
 
-					if (data[6] == null) {
-						wReport.report("Null DNI on row number " + r, ruta);
-					} else if (data[0] == null) {
+					if (data[0] == null) {
 						wReport.report("Null name on row number " + r, ruta);
+					} else if (data[1] == null && !(masterKinds.get(data[4]).equals("Person"))) {
+						wReport.report("Null location on row number " + r, ruta);
+					} else if (data[2] == null) {
+						wReport.report("Null email on row number " + r, ruta);
 					} else if (data[3] == null) {
-						wReport.report("Null birth date on row number " + r, ruta);
+						wReport.report("Null identifier on row number " + r, ruta);
 					} else if (data[4] == null) {
-						wReport.report("Null address on row number " + r, ruta);
-					} else if (data[1] == null) {
-						wReport.report("Null last name on row number " + r, ruta);
-					} else if (data[7] == null) {
-						wReport.report("Null NIF on row number " + r, ruta);
+						wReport.report("Null kind name on row number " + r, ruta);
+					
 					} else {
-						cit = new Citizen(data);
-						if (census.contains(cit)) {
-							wReport.report("Duplicated citizen on row number " + r, ruta);
+						
+						String kind = masterKinds.get(data[4]);
+						switch (kind) {
+						case "Person" : agent = new PersonAgent(data); break;
+						case "Entity" : agent = new EntityAgent(data); break;
+						case "Sensor" : agent = new SensorAgent(data); break;
+						default: agent = new GeneralAgent(data); break;
+						}
+						if (agentsCensus.contains(agent)) {
+							wReport.report("Duplicated agent on row number " + r, ruta);
 						} else {
-							census.add(cit);
+							agentsCensus.add(agent);
 						}
 
 					}
@@ -88,7 +97,7 @@ public class ExcelReadList extends AbstractReadList {
 
 			wb.close();
 		} catch (FileNotFoundException e) {
-			wReport.report(e, "No se ha encontrado el archivo solicitado");
+			wReport.report(e, "File not found");
 		}
 
 		catch (Exception ioe) {
@@ -96,19 +105,16 @@ public class ExcelReadList extends AbstractReadList {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	private String[] parseRow(XSSFRow row, int cols) throws ParseException {
+	private Object[] parseRow(XSSFRow row, int cols) throws ParseException {
 		XSSFCell cell;
-		String[] data = new String[cols];
+		Object[] data = new Object[cols];
 
 		if (row != null) {
 			for (int c = 0; c < cols; c++) {
 				cell = row.getCell((short) c);
 				if (cell != null && !cell.toString().equals("")) {
-					if (cell.getCellTypeEnum() == CellType.NUMERIC 
-							&& DateUtil.isCellDateFormatted(cell)) {
-						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-						data[c] = sdf.format(cell.getDateCellValue());
+					if (cell.getCellTypeEnum() == CellType.NUMERIC ) {
+						data[c] = Double.valueOf(cell.toString()).intValue();
 					} else {
 						data[c] = cell.toString();
 					}
@@ -118,5 +124,37 @@ public class ExcelReadList extends AbstractReadList {
 		}
 		return null;
 	}
+
+	@Override
+	protected void doParseMaster(String ruta) {
+        String line = "";
+        String cvsSplitBy = ",";
+        masterKinds = new HashMap<Integer,String>();
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] lineData = line.split(cvsSplitBy);
+                String code = lineData[1];
+                int kind = Integer.parseInt(lineData[0]);
+                masterKinds.put(kind,code);
+
+            }
+
+        }
+
+		
+
+		catch (FileNotFoundException e) {
+			wReport.report(e, "No se ha encontrado el archivo solicitado");
+		}
+
+		catch (Exception ioe) {
+			ioe.printStackTrace();
+		}
+		
+	}
+
 
 }

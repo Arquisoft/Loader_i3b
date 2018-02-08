@@ -1,6 +1,6 @@
 package parsertests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -9,35 +9,55 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.assertj.core.util.Files;
+import org.bson.Document;
+import org.junit.Before;
 import org.junit.Test;
 
-import es.uniovi.asw.parser.Citizen;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+
 import es.uniovi.asw.parser.ReadList;
+import es.uniovi.asw.parser.agents.AbstractAgent;
 import es.uniovi.asw.parser.readers.ExcelReadList;
 
 public class ExcelParseTest {
 
-	private Set<Citizen> readData;
-
+	private Set<AbstractAgent> readData;
+	
+	@Before
+	public void clearDatabase() {
+		@SuppressWarnings("resource")
+		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoDatabase db = mongoClient.getDatabase("Agents");
+		db.getCollection("agents").deleteMany(new Document());
+	}
+	
 	@Test
 	public void testParse() {
-		String result = "[Citizen [firstName=Juan, lastName=Torres"
-				+ " Pardo, email=juan@example.com, birthDate=Thu Oct"
-				+ " 10 00:00:00 CET 1985, address=C/ Federico García Lorca 2,"
-				+ " ID=90500084Y, "
-				+ "nationality=Español, NIF=1.0, pollingStation=1]]";
-		String resultForTravis = "[Citizen [firstName=Juan, lastName=Torres"
-				+ " Pardo, email=juan@example.com, birthDate=Thu Oct"
-				+ " 10 00:00:00 UTC 1985, address=C/ Federico García Lorca 2,"
-				+ " ID=90500084Y, "
-				+ "nationality=Español, NIF=1.0, pollingStation=1]]";
+		String result = "[Person Agent [Name=PersonName, location=45,-1, "
+				+ "email=person@example.com, identifier=id1]]";
 
 		ReadList rl = new ExcelReadList();
+		rl.parseMaster("src/test/resources/masterTest.csv");
 		readData = rl.parse("src/test/resources/test2.xlsx");
 
 		assertTrue(readData.toString().equals(result)
-				|| readData.toString().equals(resultForTravis));
+				);
 	}
+	
+	@Test
+	public void testParsePersonNoCoordinates() {
+		String result = "[Person Agent [Name=PersonName, location=null, "
+				+ "email=person@example.com, identifier=id1]]";
+
+		ReadList rl = new ExcelReadList();
+		rl.parseMaster("src/test/resources/masterTest.csv");
+		readData = rl.parse("src/test/resources/test3.xlsx");
+
+		assertTrue(readData.toString().equals(result)
+				);
+	}
+
 
 	@Test
 	/**
