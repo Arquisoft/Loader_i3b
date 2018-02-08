@@ -4,3 +4,45 @@ Date and hour: 08-02-2018 09:05:37
 Filename: src/test/resources/test.xlsx
 Error: Null name on row number 5
 
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:29:32
+Filename: src/test/resources/test2.xlsx
+Error: Null name on row number 2
+
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:29:32
+Filename: src/test/resources/test2.xlsx
+Error: Null name on row number 3
+
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:31:29
+Filename: src/test/resources/test2.xlsx
+Error: Null name on row number 2
+
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:31:29
+Filename: src/test/resources/test2.xlsx
+Error: Null name on row number 3
+
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:31:44
+Filename: src/test/resources/test2.xlsx
+Error: Null name on row number 2
+
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:31:44
+Filename: src/test/resources/test2.xlsx
+Error: Null name on row number 3
+
+ERROR 
+------------------------------
+Date and hour: 08-02-2018 09:32:15
+Filename: src/test/resources/test.xlsx
+Error: Null name on row number 5
+
