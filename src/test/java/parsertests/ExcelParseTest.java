@@ -35,7 +35,7 @@ public class ExcelParseTest {
 	
 	@Test
 	public void testParse() {
-		String result = "[Person [Name=PersonName, location=45,-1, "
+		String result = "[Person Agent [Name=PersonName, location=45,-1, "
 				+ "email=person@example.com, identifier=id1]]";
 
 		ReadList rl = new ExcelReadList();
