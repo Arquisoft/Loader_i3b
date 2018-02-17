@@ -31,6 +31,11 @@ import es.uniovi.asw.reportwriter.WriteReportDefault;
  */
 public class AgentDaoImplMongo implements AgentDao {
 
+	private final static String HOST = "localhost";
+	private final static int PORT = 27017;
+	private final static String DATABASE = "Agents";
+	private final static String COLLECTION = "agents";
+	
 
 	private MongoClient mongo;
 	private DB db;
@@ -38,6 +43,8 @@ public class AgentDaoImplMongo implements AgentDao {
 	private WriteReport reporter;
 	private Properties properties;
 
+	
+	
 	/**
 	 * Default constructor that initializes the database from the constants
 	 * specified above
@@ -45,36 +52,16 @@ public class AgentDaoImplMongo implements AgentDao {
 	@SuppressWarnings("deprecation")
 	public AgentDaoImplMongo() {
 		
-		if (loadProperties()) {
+		this.reporter = new WriteReportDefault();
+		this.mongo = new MongoClient(HOST, PORT);
+		this.db = mongo.getDB(DATABASE);
+		this.users = db.getCollection(COLLECTION);
 
-			this.reporter = new WriteReportDefault();
-			this.mongo = new MongoClient(properties.getProperty("host"), Integer
-					.parseInt(properties.getProperty("port")));
-			this.db = mongo.getDB(properties.getProperty("database"));
-			this.users = db.getCollection(properties.getProperty("collection"));
-
-			users.createIndex(new BasicDBObject("identifier", 1), new BasicDBObject(
-					"unique", true));
-		}
+		users.createIndex(new BasicDBObject("identifier", 1), new BasicDBObject(
+				"unique", true));
 	}
 
-	/**
-	 * Loads the database properties file
-	 * 
-	 * @return True if we could load the file without problems, false otherwise
-	 */
-	private boolean loadProperties() {
-		try {
-			FileInputStream input = new FileInputStream("src/main/resources/database.properties");
-			this.properties = new Properties();
-			this.properties.load(input);
-			return true;
-		} catch (Exception e) {
-			reporter.report(e, "Error loading database.properties file");
-			return false;
-		}
-	}
-
+	
 	/**
 	 * This method is used in the test (for using the database for test)
 	 * 
