@@ -36,10 +36,11 @@ The Java Development Kit (JDK) is a software development environment used for de
 As the project uses a MongoDB databse you need to install it in order to use the application. You can download and install mongo from [here](https://www.mongodb.com/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi/download). Once installed you must create an empty folder called "data\db" in the root of the partition where you installed mongo (Example: "C:\data\db").
 
 ### Getting the project
-In order to obtain the repository you will need to download it or clone it in case you have git installed in your machine.
+In order to obtain the repository you will need to download it or clone it in case you have git installed in your machine using the following command:
 ```sh
   git clone https://github.com/Arquisoft/Loader_i3b
   ```
+If you don´t have git downloaded in the main page of the [repository](https://github.com/Arquisoft/Loader_i3b) you will find a green button on the top-right that sais: **Clone or Download**. Select Download ZIP option and unzip it once it´s downloaded.
   
 # Run instructions
 
@@ -68,7 +69,7 @@ Once installed, open the command line (instructions explained in *How to run*), 
 ```sh
   mvn package
   ```
-A couple of .jar files will be generated in a directory called **target** within the repository. Now you will only have to execute the *Run instructions* explained before using the **Loader_i3b-0.0.1-jar-with-dependencies.jar** and the two files (first master.csv and then agents.xlsx) that you should create or download from the folder [runnable](). If you create them **you must follow the format**.
+A couple of .jar files will be generated in a directory called **target** within the repository. Now you will only have to execute following instructions in *How to run* explained before using the **Loader_i3b-0.0.1-jar-with-dependencies.jar** and the two files (first master.csv and then agents.xlsx) that you should create or download from the folder [runnable](). If you create them **you must follow the format**.
 
 ## Executing from an IDE
 Another option is to execute the application using an IDE (Eclipse, IntelliJ...). You only have to download or clone the repository, import it to your IDE and run the application (you would need to configure how to run it adding the names of the files .csv and .xlsx). In this case, you have some execution files in the path _source/test/resources_.
