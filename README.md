@@ -29,20 +29,18 @@ In this repository you will find the implementation of the first module. It is i
 * [Sergio Santano Álvarez (UO244858)](https://github.com/sergiosantano)
 
 # Set up 
-## Java Development Kit (JDK)
+### Java Development Kit (JDK)
 The Java Development Kit (JDK) is a software development environment used for developing Java applications and applets. It includes the Java Runtime Environment (JRE), an interpreter/loader (java), a compiler (javac), an archiver (jar), a documentation generator (javadoc) and other tools needed in Java development
 
-## MongoDB
+### MongoDB
 As the project uses a MongoDB databse you need to install it in order to use the application. You can download and install mongo from [here](https://www.mongodb.com/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.4.2-signed.msi/download). Once installed you must create an empty folder called "data\db" in the root of the partition where you installed mongo (Example: "C:\data\db").
 
-## Getting the project
+### Getting the project
 In order to obtain the repository you will need to download it or clone it in case you have git installed in your machine.
 ```sh
   git clone https://github.com/Arquisoft/Loader_i3b
   ```
-
-
-
+  
 # Run instructions
 
 In this section three run methodologies are explained in order to offer different options to our users.
