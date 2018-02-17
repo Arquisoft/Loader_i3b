@@ -54,7 +54,7 @@ In order to facilitate the execution, a folder called runnable has been created.
 
 ### How to run
 1. For running the application open this folder and edit (if neccessary) the .xlsx and .csv file. 
-1. Go to the directory where mongoDB was installed and execute (_C:\Program Files\MongoDB\Server\3.4\bin_) and execute the **mongod.exe**
+1. Go to the directory where mongoDB was installed (_C:\Program Files\MongoDB\Server\3.4\bin_) and execute the **mongod.exe**
 1. Open the command line by pressing the Win + R keys on your keyboard. Then, type cmd or cmd.exe and press Enter or click/tap OK.
   1. Move to the folder you have downloaded (for example _C:\Users\user\Desktop\runnable_) and execute the following command:
   1. Write the following command. Take into account that the master.csv is always written first and then agents.xlsx:
