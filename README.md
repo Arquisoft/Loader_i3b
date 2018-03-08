@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/Arquisoft/Loader_i3b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/Loader_i3b)
 
 
-This module is part of the project implemented for the laboratory assignment of the course "Software Architecture". The course is part of the Degree in Software Engineering, School of Computer Science Engineering, University of Oviedo. The whole system is divided in four modules developed by two subteams ([Team A](https://github.com/orgs/Arquisoft/teams/course1718_i3b2) and [Team B](https://github.com/orgs/Arquisoft/teams/course1718_i3b1)). This modules are:
+This module is part of the project implemented for the laboratory assignment of the course "Software Architecture". The course is part of the Degree in Software Engineering, School of Computer Science Engineering, University of Oviedo. The whole system is divided in four modules developed by two subteams ([Team A](https://github.com/orgs/Arquisoft/teams/course1718_i3b2) and [Team B](https://github.com/orgs/Arquisoft/teams/course1718_i3b1)). These modules are:
 
 * Module 1.- [Loader](https://github.com/Arquisoft/Loader_i3b)
 * Module 2.- [Agents management](https://github.com/Arquisoft/Agents_i3b)
